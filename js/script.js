@@ -3,6 +3,7 @@ var searchButton = $('.search-button');
 var weatherSearch = $('.weather-search');
 var showToday = $('#today');
 var showForecast = $('#forecast');
+var history=$('#history');
 
 function displayForecast(results){
 
@@ -102,11 +103,34 @@ function getCurrentWeather(event) {
 
 
 
+function renderHistory(){
+
+//Get stored search from localStorage
+var existingSearch = JSON.parse(localStorage.getItem("history"));
+
+history.html('');
+
+for (var i = 0; i < existingSearch.length; i++) {
+   
+    var city = existingSearch[i];
+
+    history.append(`<button id='${city}'>${city}</button>`);
+        
+  }
+
+
+}
+
+
+
 
 
 //Event listener for search button
-
 function init() {
+
+
+    
+    renderHistory();
     searchButton.click(getCurrentWeather);
    
   };
