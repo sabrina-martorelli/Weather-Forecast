@@ -1,7 +1,6 @@
 
 var searchButton = $('.search-button');
 var weatherSearch = $('.weather-search');
-
 var key ='be11bc1fc11463fbd25d54db69d7b0ba';
 
 
@@ -12,9 +11,10 @@ function getForecast(event) {
 
     if (searchCity) {
         
-      $.get(`https://api.openweathermap.org/geo/1.0/direct?q=${searchCity}&appid=${key}&units=metric`)
+      $.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${key}&units=metric`)
       .then(function (data) {
           //displayMatches(data.Search);
+          console.log('inside fucntion');
           console.log(data);
         });
   
