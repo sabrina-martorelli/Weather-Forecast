@@ -6,12 +6,15 @@ var showForecast = $('#forecast');
 
 function displayForecast(results){
 
+   
+
     for (var day of results.list) {
+        var date= moment.unix(day.dt).format("MM/DD/YYYY");
         //console.log(day);
         //console.log(day.dt_text);
         showForecast.append(`
         <div>
-        <h2>${day.dt}</h2>
+        <h2>${date}</h2>
         <h3>
         <p><img src="https://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="weather icon"></p>
         <p>Temp: ${Math.round(day.main.temp)} C°</p>
@@ -20,8 +23,6 @@ function displayForecast(results){
         </h3>
         </div>
         `)
-
-
     
     }
 }
@@ -56,9 +57,11 @@ function displayCurrentWeather(result, searchCity){
             return;
          }
          else{
+
+            var dateToday= moment.unix(result.dt).format("MM/DD/YYYY");
             showToday.append(`
             <div>
-            <h1>${searchCity} (${result.dt})<img src="https://openweathermap.org/img/w/${result.weather[0].icon}.png" alt="weather icon"></h1>
+            <h1>${searchCity} (${dateToday})<img src="https://openweathermap.org/img/w/${result.weather[0].icon}.png" alt="weather icon"></h1>
             <h3>
             <p>Temp: ${Math.round(result.main.temp)} C°</p>
             <p>Wind: ${result.wind.speed} KPH</p>
