@@ -17,9 +17,9 @@ function displayForecast(result, searchCity){
          else{
             showToday.append(`
             <div>
-            <h1>${searchCity}</h1>
+            <h1>${searchCity} <img src="https://openweathermap.org/img/w/${result.weather[0].icon}.png" alt="weather icon "></h1>
             <h3>
-            <p>Temp: ${result.main.temp} C </p>
+            <p>Temp: ${Math.round(result.main.temp)} C </p>
             <p>Wind: ${result.wind.speed} KPH</p>
             <p>Humidity: ${result.main.humidity} % </p>
             </h3>
