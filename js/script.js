@@ -1,7 +1,6 @@
 
-var searchButton = document.querySelector('.search-button');
-
-var weatherSearch = document.querySelector('.weather-search');
+var searchButton = $('.search-button');
+var weatherSearch = $('.weather-search');
 
 var key ='be11bc1fc11463fbd25d54db69d7b0ba';
 
