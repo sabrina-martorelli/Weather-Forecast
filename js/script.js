@@ -15,9 +15,9 @@ function displayForecast(results){
         //console.log(day.dt_text);
         showForecast.append(`
         <div>
-        <h1><img src="https://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="weather icon"></h1>
+        <h2>${day.dt}</h2>
         <h3>
-        <p>${day.dt}</p>
+        <p><img src="https://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="weather icon"></p>
         <p>Temp: ${Math.round(day.main.temp)} C°</p>
         <p>Wind: ${day.wind.speed} KPH</p>
         <p>Humidity: ${day.main.humidity} %</p>
