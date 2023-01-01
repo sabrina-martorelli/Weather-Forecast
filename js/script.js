@@ -2,14 +2,40 @@ var key ='be11bc1fc11463fbd25d54db69d7b0ba';
 var searchButton = $('.search-button');
 var weatherSearch = $('.weather-search');
 var showToday = $('#today');
+var showForecast = $('#forecast');
+
+function displayForecast(results){
+
+    console.log(results);
 
 
+
+    for (var day of results.list) {
+        //console.log(day);
+        //console.log(day.dt_text);
+        showForecast.append(`
+        <div>
+        <h1><img src="https://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="weather icon"></h1>
+        <h3>
+        <p>${day.dt}</p>
+        <p>Temp: ${Math.round(day.main.temp)} C°</p>
+        <p>Wind: ${day.wind.speed} KPH</p>
+        <p>Humidity: ${day.main.humidity} %</p>
+        </h3>
+        </div>
+        `)
+
+
+    
+    }
+}
+;
 
 
 
 function getForecast(latitude, longitude){
 
-console.log(latitude,longitude );
+console.log(latitude,longitude);
 
     $.get(`https://api.openweathermap.org/data/2.5/forecast?appid=${key}&lat=${latitude}&lon=${longitude}&units=metric`)
     .then(function (data) {
@@ -24,8 +50,11 @@ console.log(latitude,longitude );
 
 function displayCurrentWeather(result, searchCity){
         console.log(result);
-        //Cleans html
+        //Cleans html to display new search
         showToday.html('');
+        showForecast.html('');
+
+
         if (!result) {
             showToday.html('<p >No result found </p>'); 
             return;
