@@ -6,8 +6,8 @@ var showToday = $('#today');
 
 
 
-function displayForecast(result, searchCity){
-    
+function displayCurrentWeather(result, searchCity){
+        console.log(result);
         //Cleans html
         showToday.html('');
         if (!result) {
@@ -17,15 +17,13 @@ function displayForecast(result, searchCity){
          else{
             showToday.append(`
             <div>
-            <h1>${searchCity} <img src="https://openweathermap.org/img/w/${result.weather[0].icon}.png" alt="weather icon "></h1>
+            <h1>${searchCity} <img src="https://openweathermap.org/img/w/${result.weather[0].icon}.png" alt="weather icon"></h1>
             <h3>
-            <p>Temp: ${Math.round(result.main.temp)} C </p>
+            <p>Temp: ${Math.round(result.main.temp)} C°</p>
             <p>Wind: ${result.wind.speed} KPH</p>
-            <p>Humidity: ${result.main.humidity} % </p>
+            <p>Humidity: ${result.main.humidity} %</p>
             </h3>
-
             </div>
-            
             `)
 
          }
@@ -36,7 +34,7 @@ function displayForecast(result, searchCity){
 
 
 //Function to get Forecast information of searched city
-function getForecast(event) {
+function getCurrentWeather(event) {
 
     event.preventDefault();
 
@@ -48,7 +46,7 @@ function getForecast(event) {
       $.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${key}&units=metric`)
       .then(function (data) {
         
-       displayForecast(data, searchCity);
+       displayCurrentWeather(data, searchCity);
          
        });
        
@@ -64,7 +62,7 @@ function getForecast(event) {
 //Event listener for search button
 
 function init() {
-    searchButton.click(getForecast);
+    searchButton.click(getCurrentWeather);
    
   };
   
