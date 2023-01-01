@@ -85,8 +85,9 @@ function getCurrentWeather(event) {
     event.preventDefault();
 
     var searchCity = weatherSearch.val().trim();
-  
 
+    storeHistory(searchCity);
+  
     if (searchCity) {
         
       $.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${key}&units=metric`)
@@ -120,6 +121,12 @@ for (var i = 0; i < existingSearch.length; i++) {
 
 
 }
+
+
+function storeHistory(h) {
+    // Stringify and set "todos" key in localStorage to todos array
+    localStorage.setItem("history", JSON.stringify(h));
+  }
 
 
 
