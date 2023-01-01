@@ -6,6 +6,22 @@ var showToday = $('#today');
 
 
 
+
+function getForecast(latitude, longitude){
+
+console.log(latitude,longitude );
+
+    $.get(`https://api.openweathermap.org/data/2.5/forecast?appid=${key}&lat=${latitude}&lon=${longitude}&units=metric`)
+    .then(function (data) {
+      
+     displayForecast(data);
+       
+     });
+     
+
+
+}
+
 function displayCurrentWeather(result, searchCity){
         console.log(result);
         //Cleans html
@@ -25,6 +41,7 @@ function displayCurrentWeather(result, searchCity){
             </h3>
             </div>
             `)
+            getForecast(result.coord.lat, result.coord.lon);
 
          }
     
