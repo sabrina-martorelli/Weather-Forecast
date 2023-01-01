@@ -6,10 +6,6 @@ var showForecast = $('#forecast');
 
 function displayForecast(results){
 
-    console.log(results);
-
-
-
     for (var day of results.list) {
         //console.log(day);
         //console.log(day.dt_text);
@@ -49,7 +45,7 @@ console.log(latitude,longitude);
 }
 
 function displayCurrentWeather(result, searchCity){
-        console.log(result);
+       
         //Cleans html to display new search
         showToday.html('');
         showForecast.html('');
@@ -85,7 +81,7 @@ function getCurrentWeather(event) {
     event.preventDefault();
 
     var searchCity = weatherSearch.val().trim();
-    console.log(searchCity);
+  
 
     if (searchCity) {
         
