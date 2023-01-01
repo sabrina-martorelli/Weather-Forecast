@@ -6,12 +6,28 @@ var showToday = $('#today');
 
 
 
-function displayForecast(result){
-    console.log(result);
+function displayForecast(result, searchCity){
+    
+        //Cleans html
+        showToday.html('');
         if (!result) {
-            showToday.html('<p >No result found </p>');
-           
+            showToday.html('<p >No result found </p>'); 
             return;
+         }
+         else{
+            showToday.append(`
+            <div>
+            <h1>${searchCity}</h1>
+            <h3>
+            <p>Temp: ${result.main.temp} C </p>
+            <p>Wind: ${result.wind.speed} KPH</p>
+            <p>Humidity: ${result.main.humidity} % </p>
+            </h3>
+
+            </div>
+            
+            `)
+
          }
     
     }
@@ -32,7 +48,7 @@ function getForecast(event) {
       $.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${key}&units=metric`)
       .then(function (data) {
         
-       displayForecast(data);
+       displayForecast(data, searchCity);
          
        });
        
