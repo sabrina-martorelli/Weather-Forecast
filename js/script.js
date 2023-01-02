@@ -146,7 +146,7 @@ function init() {
 
 
     
-    //renderHistory();
+    renderHistory();
     searchButton.click(getCurrentWeather);
    
   };
