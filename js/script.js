@@ -81,14 +81,29 @@ function displayCurrentWeather(result, searchCity){
 
 
 
+
+
 //Function to get Forecast information of searched city
 function getCurrentWeather(event) {
 
     event.preventDefault();
+    var buttonClass = $(this).attr("class");
+
+    // Gets city name from imput or history button id
+   if (buttonClass !== 'btn search-button'){
+    var buttonId = $(this).attr("id"); 
+    searchCity = buttonId;
+    
+   }
+   else {
 
     var searchCity = weatherSearch.val().trim();
-
     storeHistory(searchCity);
+
+   };
+   
+
+   
   
     if (searchCity) {
         
@@ -97,9 +112,7 @@ function getCurrentWeather(event) {
         
        displayCurrentWeather(data, searchCity);
          
-       });
-       
-  
+       });   
   }
 
   }
