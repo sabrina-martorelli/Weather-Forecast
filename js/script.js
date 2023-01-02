@@ -3,7 +3,9 @@ var searchButton = $('.search-button');
 var weatherSearch = $('.weather-search');
 var showToday = $('#today');
 var showForecast = $('#forecast');
-var history=$('#history');
+var historyStored = $('#history');
+
+var newCity=[];
 
 function displayForecast(results){
 
@@ -109,13 +111,14 @@ function renderHistory(){
 //Get stored search from localStorage
 var existingSearch = JSON.parse(localStorage.getItem("history"));
 
-history.html('');
+historyStored.html('');
+
 
 for (var i = 0; i < existingSearch.length; i++) {
    
     var city = existingSearch[i];
 
-    history.append(`<button id='${city}'>${city}</button>`);
+    historyStored.append(`<button id='${city}'>${city}</button>`);
         
   }
 
@@ -124,8 +127,14 @@ for (var i = 0; i < existingSearch.length; i++) {
 
 
 function storeHistory(h) {
-    // Stringify and set "todos" key in localStorage to todos array
-    localStorage.setItem("history", JSON.stringify(h));
+    
+    var existingSearch = JSON.parse(localStorage.getItem("history"));
+    if (existingSearch !== null) {
+        newCity= existingSearch;
+      }
+
+    newCity.push(h)
+    localStorage.setItem("history", JSON.stringify(newCity));
   }
 
 
@@ -137,7 +146,7 @@ function init() {
 
 
     
-    renderHistory();
+    //renderHistory();
     searchButton.click(getCurrentWeather);
    
   };
