@@ -91,16 +91,20 @@ function getCurrentWeather(event) {
     event.preventDefault();
     var buttonClass = $(this).attr("class");
 
-    // Gets city name from imput or history button id
+    // Gets city name from input or history button id
+    //If the request is from a history button
    if (buttonClass !== 'btn search-button'){
     var buttonId = $(this).attr("id"); 
     searchCity = buttonId;
     
    }
+   //if the request is from the search button, needs to save on local storage if is not blank
    else {
 
-    var searchCity = weatherSearch.val().trim();
-    storeHistory(searchCity);
+        var searchCity = weatherSearch.val().trim();
+        if (searchCity !==''){
+            storeHistory(searchCity);
+        }
 
    };
    
@@ -153,6 +157,7 @@ function storeHistory(h) {
         newCity.push(h);
     }
     
+   
     localStorage.setItem("history", JSON.stringify(newCity));
   }
 
