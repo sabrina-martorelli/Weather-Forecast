@@ -35,7 +35,7 @@ function displayForecast(results){
 
 function getForecast(latitude, longitude){
 
-console.log(latitude,longitude);
+
 
     $.get(`https://api.openweathermap.org/data/2.5/forecast?appid=${key}&lat=${latitude}&lon=${longitude}&units=metric`)
     .then(function (data) {
@@ -102,9 +102,6 @@ function getCurrentWeather(event) {
 
    };
    
-
-   
-  
     if (searchCity) {
         
       $.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${key}&units=metric`)
