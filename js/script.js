@@ -13,7 +13,7 @@ console.log(results);
         var date= moment.unix(day.dt).format("MM/DD/YYYY");
         var hour= moment.unix(day.dt).format("hh:mm:ss a");
       
-
+        //Only shows results of 12pm
         if (hour == '12:00:00 pm'){
 
         showForecast.append(`
@@ -126,6 +126,7 @@ var existingSearch = JSON.parse(localStorage.getItem("history"));
 historyStored.html('');
 
 
+if(existingSearch){
 for (var i = 0; i < existingSearch.length; i++) {
    
     var city = existingSearch[i];
@@ -133,6 +134,7 @@ for (var i = 0; i < existingSearch.length; i++) {
     historyStored.append(`<button class='history-button' id='${city}'>${city}</button>`);
         
   }
+}
 
 historyStored.on('click', '.history-button',getCurrentWeather);  
 
