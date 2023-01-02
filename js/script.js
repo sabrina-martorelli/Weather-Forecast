@@ -4,7 +4,6 @@ var weatherSearch = $('.weather-search');
 var showToday = $('#today');
 var showForecast = $('#forecast');
 var historyStored = $('#history');
-
 var newCity = [];
 
 
@@ -40,6 +39,7 @@ function displayForecast(results) {
 
 //Function to get from https://openweathermap.org/ 5 days forecast weather information of searched city
 function getForecast(latitude, longitude) {
+   
     $.get(`https://api.openweathermap.org/data/2.5/forecast?appid=${key}&lat=${latitude}&lon=${longitude}&units=metric`)
         .then(function (data) {
             displayForecast(data);
@@ -55,7 +55,7 @@ function displayCurrentWeather(result, searchCity) {
     showForecast.html('');
     //If the search was empty 
     if (!result) {
-        showToday.html('<p >No result found for the searched city</p>');
+        showToday.html('<p>No result found. Please enter a valid city name.</p>');
         return;
     }
     else {
@@ -80,6 +80,7 @@ function displayCurrentWeather(result, searchCity) {
 
 //Function to store new searches into localStorage 
 function storeHistory(city) {
+   
     //Gets history searches form local storage
     var existingSearch = JSON.parse(localStorage.getItem("history"));
     if (existingSearch !== null) {
@@ -95,6 +96,7 @@ function storeHistory(city) {
 
 //Function to get from https://openweathermap.org/ current weather information of searched city
 function getCurrentWeather(event) {
+   
     event.preventDefault();
 
     //Gets class of button to know if is first time or form history
@@ -109,27 +111,28 @@ function getCurrentWeather(event) {
     //If the request is from the search button, needs to save on local storage if is not blank
     else {
         var searchCity = weatherSearch.val().trim();
-        //Only calls to store a new search if is the input is not blank
-        if (searchCity !== '') {
-            storeHistory(searchCity);
-        }
-
+        
     };
-    //Id the city is not blank shows the current weather
-    if (searchCity) {
+    //If the city is not blank call to display the current weather
+    if ((searchCity) && (searchCity !== '')) {
         $.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${key}&units=metric`)
             .then(function (data) {
-                displayCurrentWeather(data, searchCity);
+                  
+                    displayCurrentWeather(data, searchCity);  
+                    //Store a new search if is the input is not blank and the city exists
+                    storeHistory(searchCity);
+                
+                }
+            )
+            // I
+            .fail(function (){
+                displayCurrentWeather(false, searchCity);      
+            }
+            )
 
-            });
     }
 
 }
-
-
-
-
-
 
 
 
@@ -159,6 +162,7 @@ function renderHistory() {
 
 //Render history buttons coming from localStorage and adds event listener for search button
 function init() {
+   
     renderHistory();
     searchButton.click(getCurrentWeather);
 };
