@@ -8,13 +8,14 @@ var historyStored = $('#history');
 var newCity=[];
 
 function displayForecast(results){
-
-   
-
+console.log(results);
     for (var day of results.list) {
         var date= moment.unix(day.dt).format("MM/DD/YYYY");
-        //console.log(day);
-        //console.log(day.dt_text);
+        var hour= moment.unix(day.dt).format("hh:mm:ss a");
+      
+
+        if (hour == '12:00:00 pm'){
+
         showForecast.append(`
         <div>
         <h2>${date}</h2>
@@ -26,6 +27,7 @@ function displayForecast(results){
         </h3>
         </div>
         `)
+        }
     
     }
 }
