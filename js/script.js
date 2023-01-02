@@ -82,69 +82,6 @@ function displayCurrentWeather(result, searchCity) {
 
 
 
-
-
-
-//Function to get Forecast information of searched city
-function getCurrentWeather(event) {
-
-    event.preventDefault();
-    var buttonClass = $(this).attr("class");
-
-    // Gets city name from input or history button id
-    //If the request is from a history button
-    if (buttonClass !== 'btn search-button') {
-        var buttonId = $(this).attr("id");
-        searchCity = buttonId;
-
-    }
-    //if the request is from the search button, needs to save on local storage if is not blank
-    else {
-
-        var searchCity = weatherSearch.val().trim();
-        if (searchCity !== '') {
-            storeHistory(searchCity);
-        }
-
-    };
-
-    if (searchCity) {
-
-        $.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${key}&units=metric`)
-            .then(function (data) {
-
-                displayCurrentWeather(data, searchCity);
-
-            });
-    }
-
-}
-
-
-
-function renderHistory() {
-
-    //Get stored search from localStorage
-    var existingSearch = JSON.parse(localStorage.getItem("history"));
-
-    historyStored.html('');
-
-
-    if (existingSearch) {
-        for (var i = 0; i < existingSearch.length; i++) {
-
-            var city = existingSearch[i];
-
-            historyStored.append(`<button class='history-button' id='${city}'>${city}</button>`);
-
-        }
-    }
-
-    historyStored.on('click', '.history-button', getCurrentWeather);
-
-}
-
-
 function storeHistory(h) {
 
     var existingSearch = JSON.parse(localStorage.getItem("history"));
@@ -165,7 +102,70 @@ function storeHistory(h) {
 
 
 
-//render history buttons and adds event listener for search button
+//Function to get current weather information of searched city
+function getCurrentWeather(event) {
+    event.preventDefault();
+
+    //Gets class of button to know if is first time or form history
+    var buttonClass = $(this).attr("class");
+
+    //Sets city from input or button id depending the request
+    //If the request is from a history button
+    if (buttonClass !== 'btn search-button') { 
+        var buttonId = $(this).attr("id");
+        searchCity = buttonId;
+    }
+    //If the request is from the search button, needs to save on local storage if is not blank
+    else {
+        var searchCity = weatherSearch.val().trim();
+        //Only calls to store a new search if is the input is not blank
+        if (searchCity !== '') {
+            storeHistory(searchCity);
+        }
+
+    };
+    //Id the city is not blank shows the current weather
+    if (searchCity) {
+        $.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${key}&units=metric`)
+            .then(function (data) {
+                displayCurrentWeather(data, searchCity);
+            });
+    }
+
+}
+
+
+
+
+
+
+
+
+//Function to render history buttons coming from localStorage
+function renderHistory() {
+
+    //Get stored search from localStorage
+    var existingSearch = JSON.parse(localStorage.getItem("history"));
+
+    //Cleans html to show buttons
+    historyStored.html('');
+
+    //If there is any search stored on localStorage creates a button for each of them
+    if (existingSearch) {
+        for (var i = 0; i < existingSearch.length; i++) {
+            var city = existingSearch[i];
+            //Uses the name of the city as id for future searches
+            historyStored.append(`<button class='history-button' id='${city}'>${city}</button>`);
+        }
+    }
+    //Adds listener for each history button
+    historyStored.on('click', '.history-button', getCurrentWeather);
+
+}
+
+
+
+//Render history buttons coming from localStorage and adds event listener for search button
 function init() {
     renderHistory();
     searchButton.click(getCurrentWeather);
