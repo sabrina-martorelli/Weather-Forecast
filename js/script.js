@@ -8,7 +8,7 @@ var historyStored = $('#history');
 var newCity=[];
 
 function displayForecast(results){
-console.log(results);
+
     for (var day of results.list) {
         var date= moment.unix(day.dt).format("MM/DD/YYYY");
         var hour= moment.unix(day.dt).format("hh:mm:ss a");
