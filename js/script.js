@@ -81,20 +81,17 @@ function displayCurrentWeather(result, searchCity) {
 }
 
 
-
-function storeHistory(h) {
-
+//Function to store new searches into localStorage 
+function storeHistory(city) {
+    //Gets history searches form local storage
     var existingSearch = JSON.parse(localStorage.getItem("history"));
     if (existingSearch !== null) {
         newCity = existingSearch;
     }
-
     //Only stores cities that are not on the local storage already
-    if (!newCity.includes(h)) {
-        newCity.push(h);
+    if (!newCity.includes(city)) {
+        newCity.push(city);
     }
-
-
     localStorage.setItem("history", JSON.stringify(newCity));
 }
 
