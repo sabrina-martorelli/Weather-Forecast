@@ -118,10 +118,11 @@ for (var i = 0; i < existingSearch.length; i++) {
    
     var city = existingSearch[i];
 
-    historyStored.append(`<button id='${city}'>${city}</button>`);
+    historyStored.append(`<button class='history-button' id='${city}'>${city}</button>`);
         
   }
 
+historyStored.on('click', '.history-button',getCurrentWeather);  
 
 }
 
@@ -133,7 +134,11 @@ function storeHistory(h) {
         newCity= existingSearch;
       }
 
-    newCity.push(h)
+    //Only stores cities that are not on the local storage already
+    if  (!newCity.includes(h)){
+        newCity.push(h);
+    }
+    
     localStorage.setItem("history", JSON.stringify(newCity));
   }
 
@@ -144,8 +149,6 @@ function storeHistory(h) {
 //Event listener for search button
 function init() {
 
-
-    
     renderHistory();
     searchButton.click(getCurrentWeather);
    
