@@ -7,63 +7,61 @@ var historyStored = $('#history');
 
 var newCity = [];
 
+
+//Function to display 5 days forecast weather information of searched city
 function displayForecast(results) {
 
+    //Loops array of results
     for (var day of results.list) {
+
+        ////Creates correct format for the date  and time using https://momentjs.com/
         var date = moment.unix(day.dt).format("MM/DD/YYYY");
         var hour = moment.unix(day.dt).format("hh:mm:ss a");
 
         //Only shows results of 12pm
         if (hour == '12:00:00 pm') {
-
+            //Shows results on html page
             showForecast.append(`
-        <div>
-        <h2>${date}</h2>
-        <h3>
-        <p><img src="https://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="weather icon"></p>
-        <p>Temp: ${Math.round(day.main.temp)} C°</p>
-        <p>Wind: ${day.wind.speed} KPH</p>
-        <p>Humidity: ${day.main.humidity} %</p>
-        </h3>
-        </div>
-        `)
+                <div>
+                <h2>${date}</h2>
+                <h3>
+                <p><img src="https://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="weather icon"></p>
+                <p>Temp: ${Math.round(day.main.temp)} C°</p>
+                <p>Wind: ${day.wind.speed} KPH</p>
+                <p>Humidity: ${day.main.humidity} %</p>
+                </h3>
+                </div>
+                `)
         }
 
     }
 }
 ;
 
-
-
+//Function to get from https://openweathermap.org/ 5 days forecast weather information of searched city
 function getForecast(latitude, longitude) {
-
-
-
     $.get(`https://api.openweathermap.org/data/2.5/forecast?appid=${key}&lat=${latitude}&lon=${longitude}&units=metric`)
         .then(function (data) {
-
             displayForecast(data);
 
         });
-
-
-
 }
 
+//Function to display current weather information get it 
 function displayCurrentWeather(result, searchCity) {
 
     //Cleans html to display new search
     showToday.html('');
     showForecast.html('');
-
-
+    //If the search was empty 
     if (!result) {
-        showToday.html('<p >No result found </p>');
+        showToday.html('<p >No result found for the searched city</p>');
         return;
     }
     else {
-
+        //Creates correct format for the date using https://momentjs.com/
         var dateToday = moment.unix(result.dt).format("MM/DD/YYYY");
+        //Shows result on html page
         showToday.append(`
             <div>
             <h1>${searchCity} (${dateToday})<img src="https://openweathermap.org/img/w/${result.weather[0].icon}.png" alt="weather icon"></h1>
@@ -75,7 +73,6 @@ function displayCurrentWeather(result, searchCity) {
             </div>
             `)
         getForecast(result.coord.lat, result.coord.lon);
-
     }
 
 }
@@ -96,10 +93,7 @@ function storeHistory(city) {
 }
 
 
-
-
-
-//Function to get current weather information of searched city
+//Function to get from https://openweathermap.org/ current weather information of searched city
 function getCurrentWeather(event) {
     event.preventDefault();
 
@@ -126,6 +120,7 @@ function getCurrentWeather(event) {
         $.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${key}&units=metric`)
             .then(function (data) {
                 displayCurrentWeather(data, searchCity);
+
             });
     }
 
