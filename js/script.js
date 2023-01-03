@@ -10,6 +10,10 @@ var newCity = [];
 //Function to display 5 days forecast weather information of searched city
 function displayForecast(results) {
 
+    showForecast.append(`<h2 id="form-heading" class="mt-1 h3 form-label">
+          5-Day Forecast:
+        </h2>`);
+
     //Loops array of results
     for (var day of results.list) {
 
@@ -21,7 +25,8 @@ function displayForecast(results) {
         if (hour == '12:00:00 pm') {
             //Shows results on html page
             showForecast.append(`
-                <div>
+            
+                <div class="mt-3 border border-dark">
                 <h4>${date}</h4>
                 <h6>
                 <p><img src="https://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="weather icon"></p>
