@@ -25,7 +25,7 @@ function displayForecast(results) {
             //Shows results on html page
             showForecast.append(`
             
-                <div class="mr-4 ml-3 pr-5 border border-dark forecast-card">
+                <div class="mr-3 ml-3 pr-5 pl-2 border border-dark forecast-card">
                 <h5>${date}</h5>
                 <h6>
                 <p><img src="https://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="weather icon"></p>
@@ -70,7 +70,7 @@ function displayCurrentWeather(result, searchCity) {
         var dateToday = moment.unix(result.dt).format("DD/MM/YYYY");
         //Shows result on html page
         showToday.append(`
-            <div class='border border-dark'>
+            <div class='border border-dark pl-2'>
             <p class='font-weight-bold'>
             <h2>${searchCity} (${dateToday})<img src="https://openweathermap.org/img/w/${result.weather[0].icon}.png" alt="weather icon"></h2>
             </p>
