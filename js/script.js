@@ -70,7 +70,7 @@ function displayCurrentWeather(result, searchCity) {
         var dateToday = moment.unix(result.dt).format("DD/MM/YYYY");
         //Shows result on html page
         showToday.append(`
-            <div>
+            <div class='border border-dark'>
             <p class='font-weight-bold'>
             <h2>${searchCity} (${dateToday})<img src="https://openweathermap.org/img/w/${result.weather[0].icon}.png" alt="weather icon"></h2>
             </p>
