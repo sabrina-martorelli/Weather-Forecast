@@ -55,7 +55,7 @@ function displayCurrentWeather(result, searchCity) {
     showForecast.html('');
     //If the search was empty 
     if (!result) {
-        showToday.html('<p>No result found. Please enter a valid city name.</p>');
+        showToday.html('<h2>No result found. Please enter a valid city name.</h2>');
         return;
     }
     else {
@@ -64,12 +64,12 @@ function displayCurrentWeather(result, searchCity) {
         //Shows result on html page
         showToday.append(`
             <div>
-            <h1>${searchCity} (${dateToday})<img src="https://openweathermap.org/img/w/${result.weather[0].icon}.png" alt="weather icon"></h1>
-            <h3>
+            <h2>${searchCity} (${dateToday})<img src="https://openweathermap.org/img/w/${result.weather[0].icon}.png" alt="weather icon"></h2>
+            <h4>
             <p>Temp: ${Math.round(result.main.temp)} C°</p>
             <p>Wind: ${result.wind.speed} KPH</p>
             <p>Humidity: ${result.main.humidity} %</p>
-            </h3>
+            </h4>
             </div>
             `)
         getForecast(result.coord.lat, result.coord.lon);
