@@ -121,6 +121,8 @@ function getCurrentWeather(event) {
     //If the request is from the search button, needs to save on local storage if is not blank
     else {
         var searchCity = weatherSearch.val().trim();
+        weatherSearch.val('');
+
         
     };
     //If the city is not blank call to display the current weather
