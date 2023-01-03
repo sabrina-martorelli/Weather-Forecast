@@ -17,7 +17,7 @@ function displayForecast(results) {
     for (var day of results.list) {
 
         ////Creates correct format for the date  and time using https://momentjs.com/
-        var date = moment.unix(day.dt).format("MM/DD/YYYY");
+        var date = moment.unix(day.dt).format("DD/MM/YYYY");
         var hour = moment.unix(day.dt).format("hh:mm:ss a");
 
         //Only shows results of 12pm
@@ -64,7 +64,7 @@ function displayCurrentWeather(result, searchCity) {
     }
     else {
         //Creates correct format for the date using https://momentjs.com/
-        var dateToday = moment.unix(result.dt).format("MM/DD/YYYY");
+        var dateToday = moment.unix(result.dt).format("DD/MM/YYYY");
         //Shows result on html page
         showToday.append(`
             <div>
