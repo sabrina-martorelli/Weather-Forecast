@@ -38,6 +38,8 @@ function displayForecast(results) {
         }
 
     }
+
+    
 }
 ;
 
@@ -66,6 +68,7 @@ function displayCurrentWeather(result, searchCity) {
         return;
     }
     else {
+        
         //Creates correct format for the date using https://momentjs.com/
         var dateToday = moment.unix(result.dt).format("DD/MM/YYYY");
         //Shows result on html page
@@ -100,12 +103,14 @@ function storeHistory(city) {
         newCity.push(city);
     }
     localStorage.setItem("history", JSON.stringify(newCity));
+   
+    
 }
 
 
 //Function to get from https://openweathermap.org/ current weather information of searched city
 function getCurrentWeather(event) {
-   
+    
     event.preventDefault();
 
     //Gets id of button to know if is first time or form history
@@ -130,9 +135,14 @@ function getCurrentWeather(event) {
         $.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${key}&units=metric`)
             .then(function (data) {
                   
-                    displayCurrentWeather(data, searchCity);  
+                    
                     //Store a new search if is the input is not blank and the city exists
                     storeHistory(searchCity);
+                    renderHistory();
+                    displayCurrentWeather(data, searchCity);  
+
+                   
+                    
                 
                 }
             )
@@ -143,6 +153,7 @@ function getCurrentWeather(event) {
             )
 
     }
+    
 
 }
 
@@ -162,11 +173,14 @@ function renderHistory() {
         for (var i = 0; i < existingSearch.length; i++) {
             var city = existingSearch[i];
             //Uses the name of the city as id for future searches
-            historyStored.append(`<button class='history-button mb-2 pb-2 pt-2 btn btn-sm btn-block btn-secondary text-black-50' id='${city}'>${city}</button>`);
+            historyStored.append(`<button class='history-button${i} mb-2 pb-2 pt-2 btn btn-sm btn-block btn-secondary text-black-50' id='${city}'>${city}</button>`);
+           
+             //Adds listener for new history button
+            var newButton = $(`.history-button${i}`);
+            newButton.click(getCurrentWeather);
         }
     }
-    //Adds listener for each history button
-    historyStored.on('click', '.history-button', getCurrentWeather);
+   
 
 }
 
@@ -180,6 +194,8 @@ function init() {
 };
 
 init();
+
+
 
 
 
