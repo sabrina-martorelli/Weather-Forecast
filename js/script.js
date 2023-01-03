@@ -10,6 +10,7 @@ var newCity = [];
 //Function to display 5 days forecast weather information of searched city
 function displayForecast(results) {
 
+    //Inserts title on html as sibling of showToday
     $(`<h4 class="mt-1">5-Day Forecast:</h4>`).insertAfter(showToday);
 
     //Loops array of results
