@@ -10,7 +10,7 @@ This app will run in the browser, and will feature dynamically updated HTML and 
 
 ## Sreenshoot
 
-![screenshot](./images/screenshot1.png)
+![screenshot](./images/screenshot.png)
 
 
 ## Installation
