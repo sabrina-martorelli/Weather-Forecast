@@ -11,7 +11,7 @@ var newCity = [];
 function displayForecast(results) {
 
     //Inserts title on html as sibling of showToday
-    $(`<h4 class="mt-1">5-Day Forecast:</h4>`).insertAfter(showToday);
+    $(`<h4 class="mt-1 font-weight-bold">5-Day Forecast:</h4>`).insertAfter(showToday);
 
     //Loops array of results
     for (var day of results.list) {
@@ -68,7 +68,9 @@ function displayCurrentWeather(result, searchCity) {
         //Shows result on html page
         showToday.append(`
             <div>
+            <p class='font-weight-bold'>
             <h2>${searchCity} (${dateToday})<img src="https://openweathermap.org/img/w/${result.weather[0].icon}.png" alt="weather icon"></h2>
+            </p>
             <h6>
             <p>Temp: ${Math.round(result.main.temp)} C°</p>
             <p>Wind: ${result.wind.speed} KPH</p>
