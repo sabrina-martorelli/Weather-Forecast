@@ -162,7 +162,7 @@ function renderHistory() {
         for (var i = 0; i < existingSearch.length; i++) {
             var city = existingSearch[i];
             //Uses the name of the city as id for future searches
-            historyStored.append(`<button class='history-button btn btn-sm btn-block btn-secondary' id='${city}'>${city}</button>`);
+            historyStored.append(`<button class='history-button btn btn-sm btn-block btn-secondary text-black-50' id='${city}'>${city}</button>`);
         }
     }
     //Adds listener for each history button
