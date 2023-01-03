@@ -16,7 +16,7 @@ function displayForecast(results) {
     //Loops array of results
     for (var day of results.list) {
 
-        ////Creates correct format for the date  and time using https://momentjs.com/
+        ////Creates correct format for the date and time using https://momentjs.com/
         var date = moment.unix(day.dt).format("DD/MM/YYYY");
         var hour = moment.unix(day.dt).format("hh:mm:ss a");
 
