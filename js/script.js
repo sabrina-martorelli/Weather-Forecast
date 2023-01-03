@@ -93,6 +93,7 @@ function displayCurrentWeather(result, searchCity) {
 //Function to store new searches into localStorage 
 function storeHistory(city) {
    
+   
     //Gets history searches form local storage
     var existingSearch = JSON.parse(localStorage.getItem("history"));
     if (existingSearch !== null) {
@@ -136,7 +137,7 @@ function getCurrentWeather(event) {
             .then(function (data) {
                   
                     
-                    //Store a new search if is the input is not blank and the city exists
+                    //Store,renders and display a new search if is the input is not blank and the city exists
                     storeHistory(searchCity);
                     renderHistory();
                     displayCurrentWeather(data, searchCity);  
