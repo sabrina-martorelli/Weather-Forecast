@@ -25,8 +25,8 @@ function displayForecast(results) {
             //Shows results on html page
             showForecast.append(`
             
-                <div class="mr-3 ml-3 pr-5 pl-2 border border-dark forecast-card">
-                <h5>${date}</h5>
+                <div class="mr-3 ml-3 pr-5 pl-2 pt-2 border border-dark forecast-card">
+                <h6 class='font-weight-bold'>${date}</h6>
                 <h6>
                 <p><img src="https://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="weather icon"></p>
                 <p>Temp: ${Math.round(day.main.temp)} C°</p>
