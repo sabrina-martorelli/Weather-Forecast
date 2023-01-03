@@ -55,8 +55,11 @@ function getForecast(latitude, longitude) {
 function displayCurrentWeather(result, searchCity) {
 
     //Cleans html to display new search
+    showToday.next().html('');
     showToday.html('');
     showForecast.html('');
+   
+    
     //If the search was empty 
     if (!result) {
         showToday.html('<h5>No result found. Please enter a valid city name.</h5>');
