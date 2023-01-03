@@ -1,8 +1,8 @@
 var key = 'be11bc1fc11463fbd25d54db69d7b0ba';
 var searchButton = $('#search-button');
 var weatherSearch = $('.weather-search');
-var showToday = $('#today');
-var showForecast = $('#forecast');
+var sectionToday = $('#today');
+var sectionForecast = $('#forecast');
 var historyStored = $('#history');
 var newCity = [];
 
@@ -10,8 +10,8 @@ var newCity = [];
 //Function to display 5 days forecast weather information of searched city
 function displayForecast(results) {
 
-    //Inserts title on html as sibling of showToday
-    $(`<h4 class="mt-1 font-weight-bold">5-Day Forecast:</h4>`).insertAfter(showToday);
+    //Inserts title on html as sibling of sectionToday
+    $(`<h4 class="mt-1 font-weight-bold">5-Day Forecast:</h4>`).insertAfter(sectionToday);
 
     //Loops array of results
     for (var day of results.list) {
@@ -23,7 +23,7 @@ function displayForecast(results) {
         //Only shows results of 12pm
         if (hour == '12:00:00 pm') {
             //Shows results on html page
-            showForecast.append(`
+            sectionForecast.append(`
             
                 <div class="mr-3 ml-3 pr-5 pl-2 pt-2 border border-dark forecast-card">
                 <h6 class='font-weight-bold'>${date}</h6>
@@ -57,14 +57,14 @@ function getForecast(latitude, longitude) {
 function displayCurrentWeather(result, searchCity) {
 
     //Cleans html to display new search
-    showToday.next().html('');
-    showToday.html('');
-    showForecast.html('');
+    sectionToday.next().html('');
+    sectionToday.html('');
+    sectionForecast.html('');
    
     
     //If the search was empty 
     if (!result) {
-        showToday.html('<h5>No result found. Please enter a valid city name.</h5>');
+        sectionToday.html('<h5>No result found. Please enter a valid city name.</h5>');
         return;
     }
     else {
@@ -72,7 +72,7 @@ function displayCurrentWeather(result, searchCity) {
         //Creates correct format for the date using https://momentjs.com/
         var dateToday = moment.unix(result.dt).format("DD/MM/YYYY");
         //Shows result on html page
-        showToday.append(`
+        sectionToday.append(`
             <div class='border border-dark pl-2'>
             <p class='font-weight-bold'>
             <h2>${searchCity} (${dateToday})<img src="https://openweathermap.org/img/w/${result.weather[0].icon}.png" alt="weather icon"></h2>
