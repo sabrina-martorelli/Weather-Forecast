@@ -1,5 +1,5 @@
 var key = 'be11bc1fc11463fbd25d54db69d7b0ba';
-var searchButton = $('.search-button');
+var searchButton = $('#search-button');
 var weatherSearch = $('.weather-search');
 var showToday = $('#today');
 var showForecast = $('#forecast');
@@ -108,14 +108,15 @@ function getCurrentWeather(event) {
    
     event.preventDefault();
 
-    //Gets class of button to know if is first time or form history
-    var buttonClass = $(this).attr("class");
+    //Gets id of button to know if is first time or form history
+    var buttonClass = $(this).attr("id");
 
     //Sets city from input or button id depending the request
     //If the request is from a history button
-    if (buttonClass !== 'btn search-button') { 
+    if (buttonClass !== 'search-button') { 
         var buttonId = $(this).attr("id");
         searchCity = buttonId;
+        
     }
     //If the request is from the search button, needs to save on local storage if is not blank
     else {
