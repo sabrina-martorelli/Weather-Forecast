@@ -11,7 +11,7 @@ var newCity = [];
 function displayForecast(results) {
 
     showForecast.append(`<h2 id="form-heading" class="mt-1 h3 form-label">
-          5-Day Forecast:
+         <p> 5-Day Forecast:</p>
         </h2>`);
 
     //Loops array of results
@@ -60,7 +60,7 @@ function displayCurrentWeather(result, searchCity) {
     showForecast.html('');
     //If the search was empty 
     if (!result) {
-        showToday.html('<h2>No result found. Please enter a valid city name.</h2>');
+        showToday.html('<h5>No result found. Please enter a valid city name.</h5>');
         return;
     }
     else {
