@@ -22,13 +22,13 @@ function displayForecast(results) {
             //Shows results on html page
             showForecast.append(`
                 <div>
-                <h2>${date}</h2>
-                <h3>
+                <h4>${date}</h4>
+                <h6>
                 <p><img src="https://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="weather icon"></p>
                 <p>Temp: ${Math.round(day.main.temp)} C°</p>
                 <p>Wind: ${day.wind.speed} KPH</p>
                 <p>Humidity: ${day.main.humidity} %</p>
-                </h3>
+                </h6>
                 </div>
                 `)
         }
@@ -65,11 +65,11 @@ function displayCurrentWeather(result, searchCity) {
         showToday.append(`
             <div>
             <h2>${searchCity} (${dateToday})<img src="https://openweathermap.org/img/w/${result.weather[0].icon}.png" alt="weather icon"></h2>
-            <h4>
+            <h6>
             <p>Temp: ${Math.round(result.main.temp)} C°</p>
             <p>Wind: ${result.wind.speed} KPH</p>
             <p>Humidity: ${result.main.humidity} %</p>
-            </h4>
+            </h6>
             </div>
             `)
         getForecast(result.coord.lat, result.coord.lon);
