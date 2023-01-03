@@ -1,5 +1,12 @@
 
 
+
+.weather-header{
+
+    background: linear-gradient(90deg, rgba(52,98,187,1) 0%, rgba(42,52,129,1) 51%, rgba(32,10,76,1) 100%);
+
+}
+
 .forecast-card{
 background-color:  rgb(45, 62, 79);
 color: whitesmoke;
